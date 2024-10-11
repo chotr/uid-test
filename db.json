@@ -1,0 +1,61 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Smartphone XYZ",
+      "description": "A high-end smartphone with a sleek design and powerful features.",
+      "price": 999.99,
+      "media": [
+        {
+          "url": "https://example.com/images/smartphone_xyz.jpg",
+          "alt": "Smartphone XYZ front view"
+        },
+        {
+          "url": "https://example.com/images/smartphone_xyz.jpg",
+          "alt": "Smartphone XYZ front view"
+        }
+      ],
+      "tags": ["electronics", "mobile", "gadgets"],
+      "product_type": "smartphone"
+    },
+    {
+      "id": "2",
+      "title": "Wireless Headphones",
+      "description": "Noise-cancelling wireless headphones with superior sound quality.",
+      "price": 199.99,
+      "media": [
+        {
+          "url": "https://example.com/images/headphones.jpg",
+          "alt": "Wireless headphones"
+        }
+      ],
+      "tags": ["audio", "wireless", "headphones"],
+      "product_type": "accessory"
+    },
+    {
+      "id": "3",
+      "title": "Gaming Laptop",
+      "description": "A powerful gaming laptop with high-performance graphics and fast processing.",
+      "price": 1499.99,
+      "media": [
+        {
+          "url": "https://example.com/images/gaming_laptop.jpg",
+          "alt": "Gaming laptop"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Smartwatch Pro",
+      "description": "A smartwatch with fitness tracking and advanced health monitoring features.",
+      "price": 299.99,
+      "media": [
+        {
+          "url": "https://example.com/images/smartwatch.jpg",
+          "alt": "Smartwatch Pro"
+        }
+      ],
+      "tags": ["wearable", "fitness", "health"]
+    }
+  ]
+}
