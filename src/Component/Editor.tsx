@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const QuillEditor: React.FC = () => {
-  const [content, setContent] = useState<string>('');
+interface QuillEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const QuillEditor: React.FC<QuillEditorProps> = ({ value, onChange }) => {
+  const [content, setContent] = useState<string>("");
 
   return (
     <div>
-      <ReactQuill 
-        value={content} 
-        onChange={setContent} 
-      />
+      <ReactQuill value={value} onChange={onChange} />
       {/* <button onClick={() => console.log(content)}>Log Content</button> */}
     </div>
   );

@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import QuillEditor from "../Component/Editor";
 import ImageUploader from "../Component/ImageUploader";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 const colorOptions = [
   { value: "blue", label: "Blue" },
@@ -32,17 +32,19 @@ type ProductFormValues = {
   title: string;
   description: string;
   price: number;
+  media: File[];
 };
 
 const CreateProduct: React.FC = () => {
-  const [productName, setProductName] = useState<string>("");
-  const [productPrice, setProductPrice] = useState<number | "">("");
+  //   const [productName, setProductName] = useState<string>("");
+  //   const [productPrice, setProductPrice] = useState<string>("");
   const queryClient = useQueryClient();
-  const [isSubmitted, setIsSubmitted] = useState(true);
+  //   const [isSubmitted, setIsSubmitted] = useState(true);
   const {
     handleSubmit,
+    control,
     register,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<ProductFormValues>();
 
   const mutation = useMutation(createProduct, {
@@ -51,83 +53,107 @@ const CreateProduct: React.FC = () => {
     },
   });
 
-  function validateName(value: any) {
-    let error;
-    if (!value) {
-      error = "Name is required";
-    } else if (value.toLowerCase() !== "naruto") {
-      error = "Jeez! You're not a fan 😱";
-    }
-    return error;
-  }
-
   const onSubmit = (values: ProductFormValues) => {
-    setIsSubmitted(false);
-    if (productName && productPrice) {
-      //   const newProduct: Product = {
-      // id: Math.random().toString(36).substr(2, 9),
-      // name: productName,
-      // price: Number(productPrice),
-      //   };
-      //   mutation.mutate(newProduct);
-    }
+    // setIsSubmitted(false);
+    console.log("Form submitted successfully!", values);
+    // if (productName && productPrice) {
+    //   const newProduct: Product = {
+    // id: Math.random().toString(36).substr(2, 9),
+    // name: productName,
+    // price: Number(productPrice),
+    //   };
+    //   mutation.mutate(newProduct);
+    // }
   };
 
   return (
     <div>
       <Text mb={"16px"}>Add Product</Text>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <VStack spacing={4}>
           <Flex w={"full"} gap={"16px"}>
             <VStack flex={"1"} spacing={4}>
-              <FormControl
-                isRequired
-                isInvalid={isSubmitted && productName === ""}
-                w={"full"}
-              >
+              <FormControl isRequired isInvalid={!!errors.title} w={"full"}>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  type="text"
-                  value={productName}
-                  // onChange={(e) => setProductName(e.target.value)}
                   placeholder="Product Name"
                   {...register("title", {
-                    required: "rggergregerg",
+                    required: "This is a required field",
+                    validate: {
+                      minLength: (value) =>
+                        value.length > 8 || "Please enter at least 8 words",
+                    },
                   })}
                 />
 
-                {productName === "" && (
-                  <FormErrorMessage>Email is required.</FormErrorMessage>
-                )}
+                <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
               </FormControl>
-              <Box w={"full"}>
+              <FormControl
+                w={"full"}
+                isRequired
+                isInvalid={!!errors.description}
+              >
                 <FormLabel>Description</FormLabel>
-                <QuillEditor></QuillEditor>
-              </Box>
-              <Box w={"full"}>
+                <Controller
+                  control={control}
+                  {...register("description", {
+                    required: "This is a required field",
+                    validate: {
+                      minLength: (value) =>
+                        value.length > 100 || "Please enter at least 100 words",
+                    },
+                  })}
+                  render={({ field }) => (
+                    <QuillEditor
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                <FormErrorMessage>
+                  {errors.description?.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl w={"full"} isRequired isInvalid={!!errors.media}>
                 <FormLabel>Media</FormLabel>
-                <ImageUploader></ImageUploader>
-              </Box>
+                <Controller
+                  control={control}
+                  {...register("media", {
+                    required: "This is a required field",
+                  })}
+                  render={({ field }) => (
+                    <ImageUploader
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                <FormErrorMessage>{errors.media?.message}</FormErrorMessage>
+              </FormControl>
             </VStack>
             <VStack w={"320px"} spacing={4}>
-              <Box w={"full"}>
+              <FormControl w={"full"} isRequired isInvalid={!!errors.price}>
                 <FormLabel>Price</FormLabel>
                 <Input
-                  type="text"
-                  //   value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
                   placeholder="Enter price"
-                  required
+                  {...register("price", {
+                    required: "This is a required field",
+                    validate: {
+                      isNumber: (value) =>
+                        !isNaN(value) || "Please enter a valid number",
+                    },
+                  })}
                 />
-              </Box>
-              <Box w={"full"}>
+                <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
+              </FormControl>
+              <FormControl w={"full"}>
                 <FormLabel>Product type</FormLabel>
                 <Select placeholder="Select type">
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </Select>
-              </Box>
+              </FormControl>
               <Box w={"full"}>
                 <FormLabel>Tags</FormLabel>
                 <SelectMulti

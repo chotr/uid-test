@@ -9,6 +9,6 @@ export interface Product {
   description: string;
   price: number;
   media: Media[];
-  tags: string;
+  tags: [];
   product_type: string;
 }

@@ -4,6 +4,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import { NavLink } from "react-router-dom";
 import api from "../mockApi";
+import NLink from "../Component/NLink";
 
 export default function Layout() {
   const refMain = useRef<HTMLDivElement>(null);
@@ -43,11 +44,12 @@ export default function Layout() {
           <Flex gap={"24px"} minHeight={"100vh"} padding={"30px 0"}>
             <Box
               w="100%"
-              maxWidth={"380px"}
+              maxWidth={"340px"}
               backgroundColor={"rgb(244, 244, 244)"}
               borderRadius={"16px"}
               boxShadow={"rgba(0, 0, 0, 0.08) 0px 0px 0px"}
               padding={"30px 20px"}
+              flexShrink={'0'}
               position={{ base: "absolute", xl: "relative" }}
               height={{ base: "calc(100vh - 30px)", xl: "auto" }}
               top={{ base: "15px", xl: "unset" }}
@@ -86,63 +88,15 @@ export default function Layout() {
 
               <Flex flexDirection={"column"} gap={"16px"} mb={"24px"}>
                 <Box>
-                  <NavLink
-                    to={"/"}
-                    className={"nav-link"}
-                    style={({ isActive }) => ({
-                      display: "flex",
-                      gap: "16px",
-                      alignItems: "center",
-                      padding: "16px",
-                      backgroundColor: isActive
-                        ? "rgb(235, 235, 235)"
-                        : "transparent",
-                      borderRadius: "8px",
-                      transition: "all 0.2s ease-in-out",
-                    })}
-                  >
-                    Home
-                  </NavLink>
+                  <NLink link={"/"}>Home</NLink>
                 </Box>
 
                 <Box>
-                  <NavLink
-                    to={"/create-product"}
-                    className={"nav-link"}
-                    style={({ isActive }) => ({
-                      display: "flex",
-                      gap: "16px",
-                      alignItems: "center",
-                      padding: "16px",
-                      backgroundColor: isActive
-                        ? "rgb(235, 235, 235)"
-                        : "transparent",
-                      borderRadius: "8px",
-                      transition: "all 0.2s ease-in-out",
-                    })}
-                  >
-                    Create Product
-                  </NavLink>
+                  <NLink link={"/create-product"}>Create Product</NLink>
                 </Box>
 
                 <Box>
-                  <NavLink
-                    to={"/products"}
-                    className={"nav-link"}
-                    style={({ isActive }) => ({
-                      display: "flex",
-                      gap: "16px",
-                      alignItems: "center",
-                      padding: "16px",
-                      backgroundColor: isActive
-                        ? "rgb(235, 235, 235)"
-                        : "transparent",
-                      borderRadius: "8px",
-                      transition: "all 0.2s ease-in-out",
-                    })}
-                  >
-                    Product List
-                  </NavLink>
+                  <NLink link={"/products"}>Product List</NLink>
                 </Box>
               </Flex>
             </Box>

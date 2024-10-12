@@ -1,6 +1,7 @@
 import Layout from "../Layout/layout"
 import CreateProduct from "../Pages/createProduct"
 import Home from "../Pages/home"
+import ProductList from "../Pages/productList"
 
 
 const MainRoutes = {
@@ -15,7 +16,10 @@ const MainRoutes = {
       path: '/create-product',
       element: <CreateProduct />
     },
-
+    {
+      path: '/products',
+      element: <ProductList />
+    },
   ]
 }
 

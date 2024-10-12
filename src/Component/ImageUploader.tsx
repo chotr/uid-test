@@ -2,7 +2,12 @@ import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ImageUpload from "react-images-upload";
 
-const ImageUploader: React.FC = () => {
+interface ImageUploadProps {
+  value: File[];
+  onChange: (value: File[]) => void;
+}
+
+const ImageUploader: React.FC<ImageUploadProps> = ({ value, onChange }) => {
   const [images, setImages] = useState<File[]>([]);
 
   const onDrop = (newImages: File[]) => {
@@ -15,7 +20,7 @@ const ImageUploader: React.FC = () => {
         fileContainerStyle={{ border: "1.5px dashed #cccccc", padding: "20px" }}
         withPreview
         buttonText="Choose images"
-        onChange={onDrop}
+        onChange={onChange}
         imgExtension={[".jpg", ".gif", ".png", ".gif"]}
         maxFileSize={5242880} // 5MB
       />
