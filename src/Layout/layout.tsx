@@ -2,8 +2,6 @@ import { Outlet } from "react-router";
 import { useRef, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
-import { NavLink } from "react-router-dom";
-import api from "../mockApi";
 import NLink from "../Component/NLink";
 
 export default function Layout() {

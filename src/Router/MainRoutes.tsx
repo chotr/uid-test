@@ -1,7 +1,7 @@
 import Layout from "../Layout/layout"
 import CreateProduct from "../Pages/createProduct"
 import Home from "../Pages/home"
-import ProductList from "../Pages/productList"
+import ProductListPage from "../Pages/productList"
 
 
 const MainRoutes = {
@@ -18,7 +18,7 @@ const MainRoutes = {
     },
     {
       path: '/products',
-      element: <ProductList />
+      element: <ProductListPage />
     },
   ]
 }

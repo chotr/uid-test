@@ -15,8 +15,17 @@
           "alt": "Smartphone XYZ front view"
         }
       ],
-      "tags": ["electronics", "mobile", "gadgets"],
-      "product_type": "smartphone"
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ],
+      "product_type": {
+        "value": "smartphone",
+        "label": "Smartphone"
+      }
     },
     {
       "id": "2",
@@ -29,8 +38,17 @@
           "alt": "Wireless headphones"
         }
       ],
-      "tags": ["audio", "wireless", "headphones"],
-      "product_type": "accessory"
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ],
+      "product_type": {
+        "value": "accessory",
+        "label": "Accessory"
+      }
     },
     {
       "id": "3",
@@ -42,7 +60,8 @@
           "url": "https://bizweb.dktcdn.net/thumb/1024x1024/100/451/485/products/tai-nghe-sony-mdr-xb950bt-den-1-1.jpg?v=1664164043453",
           "alt": "Gaming laptop"
         }
-      ]
+      ],
+      "product_type": null
     },
     {
       "id": "4",
@@ -55,7 +74,213 @@
           "alt": "Smartwatch Pro"
         }
       ],
-      "tags": ["wearable", "fitness", "health"]
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ],
+      "product_type": null
+    },
+    {
+      "id": "d42d",
+      "title": "srfvergrgv4vg",
+      "description": "<p><span style=\"color: rgb(197, 134, 192);\">export</span> <span style=\"color: rgb(86, 156, 214);\">const</span> <span style=\"color: rgb(220, 220, 170);\">useCreateProduct</span> <span style=\"color: rgb(212, 212, 212);\">=</span> () <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> {</p><p>&nbsp; <span style=\"color: rgb(86, 156, 214);\">const</span> <span style=\"color: rgb(220, 220, 170);\">dispatch</span> <span style=\"color: rgb(212, 212, 212);\">=</span> <span style=\"color: rgb(220, 220, 170);\">useAppDispatch</span>();</p><p>&nbsp; <span style=\"color: rgb(86, 156, 214);\">const</span> <span style=\"color: rgb(79, 193, 255);\">queryClient</span> <span style=\"color: rgb(212, 212, 212);\">=</span> <span style=\"color: rgb(220, 220, 170);\">useQueryClient</span>();</p><p><br></p><p>&nbsp; <span style=\"color: rgb(197, 134, 192);\">return</span> <span style=\"color: rgb(220, 220, 170);\">useMutation</span>&lt;<span style=\"color: rgb(78, 201, 176);\">Product</span>, <span style=\"color: rgb(78, 201, 176);\">Error</span>, <span style=\"color: rgb(78, 201, 176);\">Product</span>&gt;(<span style=\"color: rgb(220, 220, 170);\">createProduct</span>, {</p><p>&nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">onMutate</span><span style=\"color: rgb(156, 220, 254);\">:</span> () <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> {</p><p>&nbsp; &nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">dispatch</span>(<span style=\"color: rgb(220, 220, 170);\">fetchProductsStart</span>());</p><p>&nbsp; &nbsp; },</p><p>&nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">onSuccess</span><span style=\"color: rgb(156, 220, 254);\">:</span> (<span style=\"color: rgb(156, 220, 254);\">newProduct</span>) <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> {</p><p>&nbsp; &nbsp; &nbsp; <span style=\"color: rgb(79, 193, 255);\">queryClient</span>.<span style=\"color: rgb(220, 220, 170);\">setQueryData</span>&lt;<span style=\"color: rgb(78, 201, 176);\">Product</span>[]&gt;(<span style=\"color: rgb(206, 145, 120);\">\"products\"</span>, (<span style=\"color: rgb(156, 220, 254);\">oldProducts</span>) <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> [</p><p>&nbsp; &nbsp; &nbsp; &nbsp; <span style=\"color: rgb(212, 212, 212);\">...</span>(<span style=\"color: rgb(156, 220, 254);\">oldProducts</span> <span style=\"color: rgb(212, 212, 212);\">||</span> []),</p><p>&nbsp; &nbsp; &nbsp; &nbsp; <span style=\"color: rgb(156, 220, 254);\">newProduct</span>,</p><p>&nbsp; &nbsp; &nbsp; ]);</p><p>&nbsp; &nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">dispatch</span>(<span style=\"color: rgb(220, 220, 170);\">fetchProductsSuccess</span>([<span style=\"color: rgb(156, 220, 254);\">newProduct</span>]));</p><p>&nbsp; &nbsp; },</p><p>&nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">onError</span><span style=\"color: rgb(156, 220, 254);\">:</span> (<span style=\"color: rgb(156, 220, 254);\">error</span>) <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> {</p><p>&nbsp; &nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">dispatch</span>(<span style=\"color: rgb(220, 220, 170);\">fetchProductsFailure</span>(<span style=\"color: rgb(156, 220, 254);\">error</span>.<span style=\"color: rgb(156, 220, 254);\">message</span>));</p><p>&nbsp; &nbsp; },</p><p>&nbsp; &nbsp; <span style=\"color: rgb(220, 220, 170);\">onSettled</span><span style=\"color: rgb(156, 220, 254);\">:</span> () <span style=\"color: rgb(86, 156, 214);\">=&gt;</span> {</p><p>&nbsp; &nbsp; &nbsp; <span style=\"color: rgb(79, 193, 255);\">queryClient</span>.<span style=\"color: rgb(220, 220, 170);\">invalidateQueries</span>(<span style=\"color: rgb(206, 145, 120);\">\"products\"</span>); <span style=\"color: rgb(106, 153, 85);\">// Refetch the products to get the latest list</span></p><p>&nbsp; &nbsp; },</p><p>&nbsp; });</p><p>};</p><p><br></p>",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728752081/miwsil523ir4g6f5vner.png",
+          "alt": "Uploaded image"
+        },
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728752083/c8uoqoh9pzmi8p0nrovx.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "price": "4354",
+      "product_type": null,
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ]
+    },
+    {
+      "id": "5b5a",
+      "title": "fewfefewf",
+      "description": "<p><span class=\"hljs-attr\">mutationFn</span>: <span class=\"hljs-function\">(</span><span class=\"hljs-params\">product: Product</span><span class=\"hljs-function\">) =&gt;</span> { <span class=\"hljs-keyword\">returnnew</span><span class=\"hljs-title\">Promise</span>(<span class=\"hljs-function\">(</span><span class=\"hljs-params\">resolve</span><span class=\"hljs-function\">) =&gt;</span> { <span class=\"hljs-built_in\">setTimeout</span>(<span class=\"hljs-keyword\">async</span> () =&gt; { <span class=\"hljs-keyword\">const</span> result = <span class=\"hljs-keyword\">await</span><span class=\"hljs-title\">createProduct</span>(product); <span class=\"hljs-comment\">// API call delayed by 3 seconds</span><span class=\"hljs-title\">resolve</span>(result); }, <span class=\"hljs-number\">3000</span>); <span class=\"hljs-comment\">// Delay by 3 seconds</span> }); },</p>",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728752584/b58pwdofomom89eeeqx8.png",
+          "alt": "Uploaded image"
+        },
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728752585/uipa4t90rnqcrub6m5bq.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "price": "4324324",
+      "product_type": null,
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ]
+    },
+    {
+      "id": "cbec",
+      "title": "3r3r2r32r3r",
+      "description": "<p><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; field.onChange(e);</span></p><p><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; handleProductTypeChange(e.target.value);</span><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; field.onChange(e);</span></p><p><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; handleProductTypeChange(e.target.value);</span><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; field.onChange(e);</span></p><p><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; handleProductTypeChange(e.target.value);</span><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; field.onChange(e);</span></p><p><span style=\"color: rgb(212, 212, 212);\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style=\"color: rgb(106, 153, 85);\">// &nbsp; &nbsp; handleProductTypeChange(e.target.value);</span></p>",
+      "price": "343423",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728788329/ncqyen2tjp251tajwgx7.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        }
+      ],
+      "product_type": {
+        "value": "accessory",
+        "label": "Accessory"
+      }
+    },
+    {
+      "id": "4a17",
+      "title": "443ttewfwev ",
+      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
+      "price": "4690000",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        },
+        {
+          "value": "headphones",
+          "label": "Headphones",
+          "id": "01fc"
+        }
+      ],
+      "product_type": {
+        "value": "smartphone",
+        "label": "Smartphone"
+      }
+    },
+    {
+      "id": "c176",
+      "title": "443ttewfwev ",
+      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
+      "price": "4690000",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        },
+        {
+          "value": "headphones",
+          "label": "Headphones",
+          "id": "01fc"
+        }
+      ],
+      "product_type": {
+        "value": "smartphone",
+        "label": "Smartphone"
+      }
+    },
+    {
+      "id": "5a72",
+      "title": "443ttewfwev ",
+      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
+      "price": "4690000",
+      "media": [
+        {
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
+          "alt": "Uploaded image"
+        }
+      ],
+      "tags": [
+        {
+          "value": "health",
+          "label": "Health",
+          "id": "5514"
+        },
+        {
+          "value": "headphones",
+          "label": "Headphones",
+          "id": "01fc"
+        }
+      ],
+      "product_type": {
+        "value": "smartphone",
+        "label": "Smartphone"
+      }
+    }
+  ],
+  "product_type": [
+    {
+      "value": "smartphone",
+      "label": "Smartphone",
+      "id": "f1f7"
+    },
+    {
+      "value": "accessory",
+      "label": "Accessory",
+      "id": "a610"
+    }
+  ],
+  "tags": [
+    {
+      "value": "wearable",
+      "label": "Wearable",
+      "id": "36fa"
+    },
+    {
+      "value": "fitness",
+      "label": "Fitness",
+      "id": "9181"
+    },
+    {
+      "value": "health",
+      "label": "Health",
+      "id": "5514"
+    },
+    {
+      "value": "headphones",
+      "label": "Headphones",
+      "id": "01fc"
+    },
+    {
+      "value": "wireless",
+      "label": "Wireless",
+      "id": "5505"
+    },
+    {
+      "value": "audio",
+      "label": "Audio",
+      "id": "ab16"
     }
   ]
 }

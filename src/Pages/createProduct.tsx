@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { createProduct } from "../Stores/Api/productApi";
-import { Product } from "../Stores/Api/Types/type";
+import { Media, Product, Product_type } from "../Stores/Api/Types/type";
 import { Select as SelectMulti } from "chakra-react-select";
 import {
   Box,
@@ -18,56 +18,68 @@ import {
 import QuillEditor from "../Component/Editor";
 import ImageUploader from "../Component/ImageUploader";
 import { Controller, useForm } from "react-hook-form";
-
-const colorOptions = [
-  { value: "blue", label: "Blue" },
-  { value: "purple", label: "Purple" },
-  { value: "red", label: "Red" },
-  { value: "orange", label: "Orange" },
-  { value: "yellow", label: "Yellow" },
-  { value: "green", label: "Green" },
-];
-
-type ProductFormValues = {
-  title: string;
-  description: string;
-  price: number;
-  media: File[];
-};
+import { useCreateProductApi } from "../Hooks/useProductData";
+import Loading from "../Component/loading";
+import { useTagApi } from "../Hooks/useTagData";
+import useTypeApi from "../Hooks/useTypeData";
 
 const CreateProduct: React.FC = () => {
-  //   const [productName, setProductName] = useState<string>("");
-  //   const [productPrice, setProductPrice] = useState<string>("");
-  const queryClient = useQueryClient();
-  //   const [isSubmitted, setIsSubmitted] = useState(true);
   const {
     handleSubmit,
     control,
     register,
+    setValue,
+    reset,
     formState: { errors, isValid },
-  } = useForm<ProductFormValues>();
+  } = useForm<Product>();
+  const {
+    data: tagList,
+    isLoading: loadingTags,
+    isError: errorTags,
+    error: errMessTags,
+  } = useTagApi();
+  const {
+    data: typeList,
+    isLoading: loadingType,
+    isError: errorType,
+    error: errMessType,
+  } = useTypeApi();
 
-  const mutation = useMutation(createProduct, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("products");
-    },
-  });
+  const createProductMutation = useCreateProductApi();
 
-  const onSubmit = (values: ProductFormValues) => {
-    // setIsSubmitted(false);
-    console.log("Form submitted successfully!", values);
-    // if (productName && productPrice) {
-    //   const newProduct: Product = {
-    // id: Math.random().toString(36).substr(2, 9),
-    // name: productName,
-    // price: Number(productPrice),
-    //   };
-    //   mutation.mutate(newProduct);
-    // }
+  const handleProductTypeChange = (value: string) => {
+    const selectedType = typeList?.find((type) => type.value === value);
+
+    if (selectedType) {
+      const newType: Product_type = {
+        value: selectedType.value,
+        label: selectedType.label,
+      };
+      console.log("Selected Type: ", newType);
+      return setValue("product_type", newType);
+    } else {
+      return setValue("product_type", null);
+    }
+  };
+
+  const onSubmit = (values: Product) => {
+    const newProduct = {
+      title: values.title,
+      description: values.description,
+      price: values.price,
+      media: values.media,
+      tags: values.tags || [],
+      product_type: values.product_type || null,
+    };
+
+    if (createProductMutation.isSuccess) {
+      reset();
+    }
+    createProductMutation.mutate(newProduct);
   };
 
   return (
-    <div>
+    <Box>
       <Text mb={"16px"}>Add Product</Text>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <VStack spacing={4}>
@@ -131,7 +143,7 @@ const CreateProduct: React.FC = () => {
                 <FormErrorMessage>{errors.media?.message}</FormErrorMessage>
               </FormControl>
             </VStack>
-            <VStack w={"320px"} spacing={4}>
+            <VStack w={"400px"} spacing={4}>
               <FormControl w={"full"} isRequired isInvalid={!!errors.price}>
                 <FormLabel>Price</FormLabel>
                 <Input
@@ -148,30 +160,57 @@ const CreateProduct: React.FC = () => {
               </FormControl>
               <FormControl w={"full"}>
                 <FormLabel>Product type</FormLabel>
-                <Select placeholder="Select type">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </Select>
+
+                <Controller
+                  control={control}
+                  name="product_type"
+                  render={({ field }) => (
+                    <Select
+                      placeholder="Select type"
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleProductTypeChange(e.target.value);
+                      }}
+                    >
+                      {typeList?.map((type) => (
+                        <option value={type.value}>{type.label}</option>
+                      ))}
+                    </Select>
+                  )}
+                />
               </FormControl>
               <Box w={"full"}>
                 <FormLabel>Tags</FormLabel>
-                <SelectMulti
-                  isMulti
-                  name="colors"
-                  options={colorOptions}
-                  placeholder="Select tags"
-                  closeMenuOnSelect={false}
+
+                <Controller
+                  control={control}
+                  {...register("tags")}
+                  render={({ field: { onChange, value } }) => (
+                    <SelectMulti
+                      isMulti
+                      name="tags"
+                      options={tagList}
+                      placeholder="Select tags"
+                      closeMenuOnSelect={false}
+                      onChange={(val) => onChange(val)}
+                    />
+                  )}
                 />
               </Box>
             </VStack>
           </Flex>
-          <Button ml={"auto"} w={"320px"} type="submit">
+
+          {createProductMutation.isLoading && (
+            <Box mb={4}>
+              <Loading></Loading>
+            </Box>
+          )}
+          <Button w={"320px"} type="submit">
             Add
           </Button>
         </VStack>
       </form>
-    </div>
+    </Box>
   );
 };
 
