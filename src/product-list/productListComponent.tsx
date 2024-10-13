@@ -14,7 +14,6 @@ const ProductListComponent: React.FC<ProductListProps> = ({
   product,
   index,
 }) => {
-  console.log(product.tags);
 
   return (
     <Tr>

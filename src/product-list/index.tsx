@@ -18,10 +18,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useProductApi } from "../Hooks/useProductData";
-import { Product } from "../Stores/Api/Types/type";
+import { Product, Tag } from "../Stores/Api/Types/type";
 import { Select as SelectMulti } from "chakra-react-select";
 import { Search2Icon } from "@chakra-ui/icons";
 import ProductListComponent from "./productListComponent";
+import { useTagApi } from "../Hooks/useTagData";
+import { useEffect, useState } from "react";
 
 const colorOptions = [
   { value: "blue", label: "Blue" },
@@ -34,6 +36,51 @@ const colorOptions = [
 
 const ProductList: React.FC = () => {
   const { data: products, isLoading, isError, error } = useProductApi();
+  const {
+    data: tagList,
+    isLoading: loadingTags,
+    isError: errorTags,
+    error: errMessTags,
+  } = useTagApi();
+
+  const [productList, setProductList] = useState<Product[]>([]);
+  const [productSearchSelected, setProductSearchSelected] = useState<Product[]>(
+    []
+  );
+
+  const handleChangTag = (e: any) => {
+    let productSelected: Product[] = [];
+    if (e.length > 0) {
+      productSelected =
+        products?.filter((p) => {
+          return p.tags?.some((productTag: any) =>
+            e.some((selectedTag: any) => selectedTag.value === productTag.value)
+          );
+        }) || [];
+        setProductSearchSelected(productSelected);
+        setProductList(productSelected)
+    } else {
+      setProductSearchSelected(products || []);
+      setProductList(products || []);
+    }
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value !== "") {
+      const prFT = productList.filter((p: Product) =>
+        p.title.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setProductSearchSelected(prFT);
+    }
+    else {
+      setProductSearchSelected(productList || []);
+    }
+  };
+
+  useEffect(() => {
+    setProductList(products || []);
+    setProductSearchSelected(products || []);
+  }, [products]);
 
   if (isError) return <p>Error: {error?.message}</p>;
   return (
@@ -47,7 +94,11 @@ const ProductList: React.FC = () => {
               <InputLeftAddon height={"40px"}>
                 <Search2Icon />
               </InputLeftAddon>
-              <Input placeholder="Search" height={"40px"} />
+              <Input
+                placeholder="Search"
+                height={"40px"}
+                onChange={(e) => handleSearch(e)}
+              />
               {/* <InputRightAddon height={'40px'}>.com</InputRightAddon> */}
             </InputGroup>
           </Box>
@@ -55,9 +106,10 @@ const ProductList: React.FC = () => {
             <SelectMulti
               isMulti
               name="colors"
-              options={colorOptions}
+              options={tagList}
               placeholder="Filter tags"
               closeMenuOnSelect={false}
+              onChange={(e) => handleChangTag(e)}
             />
           </Box>
         </Flex>
@@ -77,7 +129,7 @@ const ProductList: React.FC = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {products?.map((product: Product, index: number) => {
+            {productSearchSelected?.map((product: Product, index: number) => {
               return (
                 <ProductListComponent
                   isLoading={isLoading}
