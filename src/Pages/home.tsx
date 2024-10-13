@@ -1,5 +1,11 @@
+import { Heading } from "@chakra-ui/react";
+
 const Home: React.FC = () => {
-    return <>Home</>
+  return (
+    <>
+      <Heading mb={10}>Home</Heading>
+    </>
+  );
 };
 
 export default Home;

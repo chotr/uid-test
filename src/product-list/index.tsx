@@ -1,6 +1,7 @@
 import {
   Box,
   Flex,
+  Heading,
   Image,
   Input,
   InputGroup,
@@ -57,8 +58,8 @@ const ProductList: React.FC = () => {
             e.some((selectedTag: any) => selectedTag.value === productTag.value)
           );
         }) || [];
-        setProductSearchSelected(productSelected);
-        setProductList(productSelected)
+      setProductSearchSelected(productSelected);
+      setProductList(productSelected);
     } else {
       setProductSearchSelected(products || []);
       setProductList(products || []);
@@ -71,8 +72,7 @@ const ProductList: React.FC = () => {
         p.title.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setProductSearchSelected(prFT);
-    }
-    else {
+    } else {
       setProductSearchSelected(productList || []);
     }
   };
@@ -86,6 +86,8 @@ const ProductList: React.FC = () => {
   return (
     <VStack>
       <Box w={"full"}>
+      <Heading mb={10}>Product List</Heading>
+
         <Text mb={"12px"}>Search</Text>
 
         <Flex gap={"16px"}>
@@ -115,32 +117,35 @@ const ProductList: React.FC = () => {
         </Flex>
       </Box>
 
-      <TableContainer w={"full"}>
-        <Table size="sm">
-          <Thead>
-            <Tr>
-              <Th w={"40px"}>#</Th>
-              <Th w={"80px"}>Images</Th>
-              <Th>Title</Th>
-              <Th w={"30%"}>Description</Th>
-              <Th isNumeric>Price</Th>
-              <Th>Type</Th>
-              <Th>Tag</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {productSearchSelected?.map((product: Product, index: number) => {
-              return (
-                <ProductListComponent
-                  isLoading={isLoading}
-                  product={product}
-                  index={index}
-                />
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
+      <Box overflowX={"auto"} maxWidth={"full"} w={"full"}>
+        <TableContainer w={"full"} minWidth={"700px"} overflowX={"auto"}>
+          <Table size="sm">
+            <Thead>
+              <Tr>
+                <Th w={"40px"}>#</Th>
+                <Th w={"80px"}>Images</Th>
+                <Th>Title</Th>
+                <Th w={"30%"}>Description</Th>
+                <Th isNumeric>Price</Th>
+                <Th>Type</Th>
+                <Th>Tag</Th>
+                <Th>{""}</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {productSearchSelected?.map((product: Product, index: number) => {
+                return (
+                  <ProductListComponent
+                    isLoading={isLoading}
+                    product={product}
+                    index={index}
+                  />
+                );
+              })}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </VStack>
   );
 };

@@ -155,87 +155,31 @@
       }
     },
     {
-      "id": "4a17",
-      "title": "443ttewfwev ",
-      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
-      "price": "4690000",
+      "id": "1642",
+      "title": "sasacacascscasc",
+      "description": "<p>&nbsp;Type 'undefined' is not assignable to type 'string'.</p><p>[0]&nbsp;&nbsp;&nbsp;20 |&nbsp;&nbsp;const handleDeleteProduct = () =&gt; {</p><p>[0]&nbsp;&nbsp;&nbsp;21 |&nbsp;&nbsp;&nbsp;if (window.confirm('Are you sure you want to delete this product?')) {</p><p>[0]&nbsp;&nbsp;&gt; 22 |&nbsp;&nbsp;&nbsp;&nbsp;deleteProductApi.mutate(product?.id); // Gọi mutation để xóa sản phẩm</p><p>[0]&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^^^^^^^^^^^</p><p>[0]&nbsp;&nbsp;&nbsp;23 |&nbsp;&nbsp;&nbsp;}</p><p>[0]&nbsp;&nbsp;&nbsp;24 |&nbsp;&nbsp;}</p>",
+      "price": "34234",
       "media": [
         {
-          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
+          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728803633/dgte1ameeuyk3ekcbip6.png",
           "alt": "Uploaded image"
         }
       ],
       "tags": [
         {
-          "value": "health",
-          "label": "Health",
-          "id": "5514"
+          "value": "wearable",
+          "label": "Wearable",
+          "id": "36fa"
         },
         {
-          "value": "headphones",
-          "label": "Headphones",
-          "id": "01fc"
+          "value": "audio",
+          "label": "Audio",
+          "id": "ab16"
         }
       ],
       "product_type": {
-        "value": "smartphone",
-        "label": "Smartphone"
-      }
-    },
-    {
-      "id": "c176",
-      "title": "443ttewfwev ",
-      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
-      "price": "4690000",
-      "media": [
-        {
-          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
-          "alt": "Uploaded image"
-        }
-      ],
-      "tags": [
-        {
-          "value": "health",
-          "label": "Health",
-          "id": "5514"
-        },
-        {
-          "value": "headphones",
-          "label": "Headphones",
-          "id": "01fc"
-        }
-      ],
-      "product_type": {
-        "value": "smartphone",
-        "label": "Smartphone"
-      }
-    },
-    {
-      "id": "5a72",
-      "title": "443ttewfwev ",
-      "description": "<p>createProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutatioProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p><p>createProductMutation.isSuccesscreateProductMutation.isSuccess</p>",
-      "price": "4690000",
-      "media": [
-        {
-          "url": "https://res.cloudinary.com/dibbhnisq/image/upload/v1728790407/t1dtbw2sssm5rfx2musw.png",
-          "alt": "Uploaded image"
-        }
-      ],
-      "tags": [
-        {
-          "value": "health",
-          "label": "Health",
-          "id": "5514"
-        },
-        {
-          "value": "headphones",
-          "label": "Headphones",
-          "id": "01fc"
-        }
-      ],
-      "product_type": {
-        "value": "smartphone",
-        "label": "Smartphone"
+        "value": "accessory",
+        "label": "Accessory"
       }
     }
   ],

@@ -1,7 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useAppDispatch } from "../Stores/store";
 import { Product } from "../Stores/Api/Types/type";
-import { createProduct, fetchProducts } from "../Stores/Api/productApi";
+import {
+  createProduct,
+  deleteProduct,
+  fetchProducts,
+} from "../Stores/Api/productApi";
 import {
   fetchProductsFailure,
   fetchProductsStart,
@@ -17,9 +21,34 @@ export const useProductApi = () => {
       dispatch(fetchProductsSuccess(data));
     },
     onError: (error) => {
-      dispatch(fetchProductsFailure(error.message)); 
+      dispatch(fetchProductsFailure(error.message));
     },
   });
+};
+
+export const useDeleteProductApi = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    async (productId: string) => {
+      return await deleteProduct(productId);
+    },
+    {
+      onSuccess: (_data, productId) => {
+        queryClient.setQueryData<Product[]>("products", (oldProducts) =>
+          oldProducts
+            ? oldProducts.filter((product) => product.id !== productId)
+            : []
+        );
+      },
+      onError: (error) => {
+        console.error("Failed to delete product:", error);
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries("products");
+      },
+    }
+  );
 };
 
 export const useCreateProductApi = () => {

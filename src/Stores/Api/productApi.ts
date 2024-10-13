@@ -16,7 +16,16 @@ export const createProduct = async (product: Product): Promise<Product> => {
 };
 
 // update product
-export const updateProduct = async (id: string, product: Product): Promise<Product> => {
-    const response = await api.put(API_URL + `/${id}`, product);
-    return response.data;
-}
+export const updateProduct = async (
+  id: string,
+  product: Product
+): Promise<Product> => {
+  const response = await api.put(API_URL + `/${id}`, product);
+  return response.data;
+};
+
+// delete product
+export const deleteProduct = async (id: string): Promise<Product> => {
+  const response = await api.delete(API_URL + `/${id}`);
+  return response.data;
+};

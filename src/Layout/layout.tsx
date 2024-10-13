@@ -47,7 +47,7 @@ export default function Layout() {
               borderRadius={"16px"}
               boxShadow={"rgba(0, 0, 0, 0.08) 0px 0px 0px"}
               padding={"30px 20px"}
-              flexShrink={'0'}
+              flexShrink={"0"}
               position={{ base: "absolute", xl: "relative" }}
               height={{ base: "calc(100vh - 30px)", xl: "auto" }}
               top={{ base: "15px", xl: "unset" }}
@@ -98,7 +98,7 @@ export default function Layout() {
                 </Box>
               </Flex>
             </Box>
-            <Box flex={1} p={{ base: "0", xl: "10px 0" }}>
+            <Box flex={1} p={{ base: "0", xl: "10px 0" }} overflowX={"hidden"}>
               <Outlet></Outlet>
             </Box>
           </Flex>
