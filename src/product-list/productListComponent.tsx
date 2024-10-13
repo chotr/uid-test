@@ -37,7 +37,16 @@ const ProductListComponent: React.FC<ProductListProps> = ({
     <Tr>
       <Td>{index + 1}</Td>
       <Td>
-        <Image src={product?.media[0].url || ""} />
+        <Box overflow={"hidden"} pt={"100%"} position={"relative"} backgroundColor={'gray.100'}>
+          <Image
+            src={product?.media[0].url || ""}
+            position={"absolute"}
+            inset={"0"}
+            objectFit={'cover'}
+            w={'full'}
+            h={'full'}
+          />
+        </Box>
       </Td>
       <Td>{limitText(product?.title, 50) || ""}</Td>
       <Td>{limitText(product?.description, 50) || ""}</Td>
@@ -61,7 +70,7 @@ const ProductListComponent: React.FC<ProductListProps> = ({
       </Td>
       <Td>
         <Box cursor={"pointer"} onClick={() => handleDeleteProduct()}>
-          <DeleteIcon color={'red.400'} />
+          <DeleteIcon color={"red.400"} />
         </Box>
       </Td>
     </Tr>
